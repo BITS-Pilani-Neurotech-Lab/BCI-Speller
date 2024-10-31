@@ -1,1 +1,1 @@
-# Huffman-BCI-Speller
+# BCI-Speller
