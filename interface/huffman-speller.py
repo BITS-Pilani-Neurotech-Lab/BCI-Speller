@@ -1,7 +1,7 @@
 import json
 import tkinter as tk
 
-from utils import Node, construct_tree
+from utils import construct_tree
 
 CHAR_FILE = 'char_info.json'
 
@@ -27,6 +27,13 @@ root.grid_columnconfigure(1, weight = 1)
 root_node = None
 with open(CHAR_FILE, 'r') as char_file:
 	char_info = json.load(char_file)
+	temp = {}
+	for char, freq in char_info.items():
+		if char.isalnum():
+			char = char.upper()
+			temp[char] = temp.get(char, 0) + freq
+	sum_freqs = sum(temp.values())
+	char_info = {char: freq / sum_freqs for char, freq in temp.items()}
 	root_node = construct_tree(char_info)
 curr_node = root_node
 
